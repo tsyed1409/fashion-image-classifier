@@ -80,7 +80,7 @@ uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
 
 if uploaded_file:
     image = Image.open(uploaded_file).convert("RGB")
-    st.image(image, caption="Uploaded image", use_column_width=True)
+    st.image(image, caption="Uploaded image", width="stretch")
     input_tensor = TRANSFORM(image).unsqueeze(0)
 
     with torch.no_grad():
@@ -99,5 +99,5 @@ if uploaded_file:
     overlay = cv2.addWeighted(original, 0.5, heatmap, 0.5, 0)
 
     st.markdown("### Grad-CAM heatmap")
-    st.image(overlay, channels="BGR", caption="Class-specific activation overlay", use_column_width=True)
+    st.image(overlay, channels="BGR", caption="Class-specific activation overlay", width="stretch")
     st.caption("CNN trained on FashionMNIST | PyTorch + Streamlit + Grad-CAM")
